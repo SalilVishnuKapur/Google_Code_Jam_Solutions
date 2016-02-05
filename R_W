@@ -1,0 +1,83 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+
+
+public class Reverse_Words {
+	File ObF=new File("C:\\/Users\\/1531071\\/Documents\\/B-large-practice.in");
+	FileReader ObR=null;
+	BufferedReader brin=null;
+	FileWriter ObW=null;
+	BufferedWriter brout=null;
+	int first_row;
+	int iter=1;	
+	int len=0;
+	int Sum;
+	String str_print;
+	String temp;
+	int internal_iter;
+	int[] v=new int[6];
+	String[] s=new String[6];
+	public void  read() throws NumberFormatException, IOException
+	{
+		try {
+			ObR=new FileReader(ObF);
+			brin=new BufferedReader(ObR); 
+			first_row=Integer.parseInt(brin.readLine());
+			while(iter<=first_row)
+			{
+				s=brin.readLine().split(" ");
+				
+				new Reverse_Words().write(iter, s, s.length);	
+
+				iter=iter+1;
+				len=0;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
+
+		//System.ou	t.println(i); 
+	}
+	public void  write(int iter,String[] i,int l)
+	{
+		if(l%2==0)
+		{
+			for(int j=0;j<(l/2);j++)
+			{
+				temp=i[j];
+				i[j]=i[l-1-j];		
+				i[l-1-j]=temp;
+			}
+
+		}else
+		{
+			for(int j=0;j<((l-1)/2);j++)
+			{
+				temp=i[j];
+				i[j]=i[l-1-j];		
+				i[l-1-j]=temp;
+			}
+		}
+		str_print="Case #"+iter+": ";
+		for(int m=0;m<l;m++)
+		{
+			str_print=str_print+i[m]+" ";
+		}
+		System.out.println(str_print); 
+	}
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		Reverse_Words obj=new Reverse_Words();
+		obj.read();
+
+	}
+
+}
