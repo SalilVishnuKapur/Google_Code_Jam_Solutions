@@ -1,0 +1,88 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+
+
+public class prac_Jam {
+	File ObF=new File("C:\\/Users\\/1531071\\/Documents\\/A-small-practice.in");
+	FileReader ObR=null;
+	BufferedReader brin=null;
+	FileWriter ObW=null;
+	BufferedWriter brout=null;
+	int first_row;
+	int iter=1;	
+	int Sum;
+	int internal_iter;
+	int[] v=new int[150];
+	String[] s=new String[150];
+	public void  read() throws NumberFormatException, IOException
+	{
+		try {
+			ObR=new FileReader(ObF);
+			brin=new BufferedReader(ObR); 
+			first_row=Integer.parseInt(brin.readLine());
+			//System.out.println(first_row);
+			while(iter<=first_row)
+			{
+				System.out.println("salil");
+				for(int i=0;i<3;i++)
+				{
+					if(i==0)
+					{
+						Sum=Integer.parseInt(brin.readLine());
+					}else if(i==1)
+					{
+						internal_iter=Integer.parseInt(brin.readLine());
+					}else if(i==2)
+					{
+						s=brin.readLine().split(" ");
+						for(int j=0;j<internal_iter;j++)
+						{
+							v[j]=Integer.parseInt(s[j]); 
+						}
+
+					}
+				}
+
+				outerloop:
+					for (int m=0;m<internal_iter;m++)
+					{
+						for (int n=m;n<internal_iter;n++)
+						{
+							if((v[m]+v[n])==Sum)
+							{
+								new prac_Jam().write(iter, m+1, n+1);
+								break outerloop;
+							}
+						}
+
+
+					}
+				internal_iter=0;
+				iter=iter+1;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
+
+		//System.ou	t.println(i); 
+	}
+	public void  write(int i,int x, int y)
+	{
+		System.out.println("Case #"+i+": "+x+" "+y); 
+	}
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		prac_Jam obj=new prac_Jam();
+		obj.read();
+
+	}
+
+}
