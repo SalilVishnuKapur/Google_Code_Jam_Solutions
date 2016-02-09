@@ -1,0 +1,117 @@
+package round_1;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+
+
+
+public class Scale_prod {
+	File ObF=new File("C:\\/Users\\/1531071\\/Documents\\/A-small-practice.in");
+	FileReader ObR=null;
+	BufferedReader brin=null;
+	FileWriter ObW=null;
+	BufferedWriter brout=null;
+	int first_row;
+	int iter=1;	
+	int Sum;
+	int internal_iter;
+	int[] v1=new int[2000];
+	int[] v2=new int[2000];
+	String[] s=new String[2000];
+	public void  read() throws NumberFormatException, IOException
+	{
+		try {
+			ObR=new FileReader(ObF);
+			brin=new BufferedReader(ObR); 
+			first_row=Integer.parseInt(brin.readLine());
+			//System.out.println(first_row);
+			while(iter<=first_row)
+			{
+
+				int	vec_len=Integer.parseInt(brin.readLine());
+
+				s=brin.readLine().split(" ");
+				for(int j=0;j<vec_len;j++)
+				{
+					v1[j]=Integer.parseInt(s[j]); 
+				}
+
+				s=brin.readLine().split(" ");
+				for(int j=0;j<vec_len;j++)
+				{
+					v2[j]=Integer.parseInt(s[j]); 
+				}
+
+				new Scale_prod().write(v1,v2, vec_len,iter);
+
+				iter=iter+1;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
+
+		//System.ou	t.println(i); 
+	}
+	public void  write(int[] x, int[] y, int len,int iter)
+	{
+
+		for (int j = 0; j<len; j++) {
+			for (int k = 0; k < len; k++){
+				if (x[j] < x[k]) {
+					int buffer = x[j];
+					x[j] = x[k];
+					x[k] = buffer; 
+				}
+			}
+		}
+		
+		for (int j = 0; j<len; j++) {
+			for (int k = 0; k < len; k++){
+				if (y[j] < y[k]) {
+					int buffer = y[j];
+					y[j] = y[k];
+					y[k] = buffer; 
+				}
+			}
+		}
+	    /*	
+		for (int i=0; i<len; i++)
+		{
+			System.out.print(x[i]);	
+		} 
+		System.out.println();
+		for (int i=0; i<len; i++)
+		{
+			System.out.print(y[i]);	
+		} 
+		System.out.println();
+		System.out.println("**********************");
+		*/
+		
+		
+		
+	    for (int i=0; i<len; i++)
+		{
+
+			Sum=Sum+(x[i]*y[len-1-i]);
+		}
+		System.out.println("Case #"+iter+": "+Sum); 
+		Sum=0;
+		
+	}
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		Scale_prod obj=new Scale_prod();
+		obj.read();
+
+	}
+
+}
